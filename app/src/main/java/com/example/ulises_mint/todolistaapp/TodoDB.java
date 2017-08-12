@@ -90,6 +90,15 @@ public class TodoDB extends SQLiteOpenHelper {
     {
         this.getWritableDatabase().delete(TaskSchema.TaskColumns.TABLE_NAME, TaskSchema.TaskColumns.TITLE + " LIKE ?",new String[]{title});
     }
+
+    public void updateTask(String title, String info,String date)
+    {
+        ContentValues values = new ContentValues();
+        values.put(TaskSchema.TaskColumns.TITLE, title);
+        values.put(TaskSchema.TaskColumns.INFORMATION, info);
+        values.put(TaskSchema.TaskColumns.DATE, date);
+        this.getWritableDatabase().update(TaskSchema.TaskColumns.TABLE_NAME, values, TaskSchema.TaskColumns.TITLE + " = ?",new String[]{title});
+    }
     public void closeDB()
     {
         this.close();
